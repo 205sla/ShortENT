@@ -4,40 +4,145 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome to Firebase Hosting</title>
+  <title>짧은 엔트리</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css" />
 
 
 </head>
 
 <body>
+  <div class="mainC container">
+    <div class="loading-container HoldMiddle" style="display: none;">
+      <div id="loadURL" class="text-center">
+        <div class="spinner-grow" role="status">
+        </div>
+        <p class="mt-2">로딩 중...</p>
+      </div>
+      
+      <div id="moveURL" class="text-center" style="display: none;">
+        <i class="bi bi-check-circle-fill fs-5"></i>
+        <p class="mt-2">이동 중...</p>
+      </div>   
+      
+      <div id="errorURL" class="text-center" style="display: none;">
+        <i class="bi bi-exclamation-circle-fill fs-5"></i>
+        <p class="mt-2">잘못된 주소입니다.</p>
+        <p class="mt-2"><button type="button" class="btn btn-outline-dark GoMainPage">단축 URL 생성하기</button></p>
+      </div>
 
-  <a href="https://playentry.org/" class="link-success">엔트리로 가기</a>
+      <div id="errorShow" class="text-center" style="display: none;">
+        <i class="bi bi-exclamation-circle-fill fs-5"></i>
 
-  <h1>단축 URL 생성</h1>
-  <div>
-    <h1>프로젝트 정보 입력</h1>
-    <label for="projectId">프로젝트 ID:</label>
-    <input type="text" id="projectId" required>
-    <br><br>
-    <label for="nickname">별명:</label>
-    <input type="text" id="nickname" required>
-    <br><br>
-    <button onclick="validateAndSubmit()">제출</button>
-    <UL>
-      <li> 프로젝트 ID 부분에 엔트리 작품 주소 맨 뒷부분 적고 원하는 별명 적으세요
-      </li>
-      <LI> https://엔트리.org/별명 접속하면 해당 작품으로 이동함
-      </LI>
-      <LI>
-        생성된 url은 언제든지 삭제될 수 있음
+        <p class="mt-2" id="errorTXT">오류</p>
+        <p class="mt-2"><button type="button" class="btn btn-outline-dark GoMainPage">단축 URL 생성하기</button></p>
+      </div>
 
-      </LI>
-    </UL>
+      <div id="strangerURL" class="text-center" style="display: none;">
+        <i class="bi bi-question-circle-fill fs-5" style="color: red;"></i>
+        <p class="mt-2">잘못된 주소인것 같습니다.</p>
+        <p class="mt-2" id="stranger">이동하기</p>
+        <p class="mt-2"><button type="button" class="btn btn-outline-dark GoMainPage">단축 URL 생성하기</button></p>
+      </div>
+
+      <div id="successURL" class="text-center" style="display: none;">
+        <i class="bi bi-check-circle-fill fs-5"></i>
+        <p class="mt-2">짧은 URL 생성 완료!</p>
+      </div>  
+    </div>
+
+    <div class="mainPage mt-3" style="display: none;">
+      <div class="mainTitle">
+        <figure class="text-center">
+          <blockquote class="blockquote">
+            <p>단축 URL 생성 서비스</p>
+          </blockquote>
+          <figcaption class="blockquote-footer">
+            엔트리 전용 : <cite title="Source Title">작품, 마이페이지, 월드</cite>
+          </figcaption>
+        </figure>
+
+      </div>     
+
+      <div class="input-container p-5">
+      
+
+        <form >
+          <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-2 pt-0">분류</legend>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                <label class="form-check-label" for="gridRadios1">
+                  엔트리 작품
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" disabled>
+                <label class="form-check-label" for="gridRadios2">
+                  마이페이지
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                <label class="form-check-label" for="gridRadios3">
+                  탐험하기
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="row mb-3">
+            <label for="inputURL" class="col-sm-2 col-form-label">주소</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="inputURL" placeholder="https://playentry.org/project/...">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputNickname" class="col-sm-2 col-form-label">별명</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputNickname" placeholder="minigame">
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-sm-10 offset-sm-2">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                <label class="form-check-label" for="gridCheck1">
+                  나는 로봇 입니다.
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="button" id="CreateShortcutURL" class="btn btn-primary">생성</button>
+        </form>
+      </div>
+
+
+    </div>
+
+    
+  </div>
+
+
+
+  <div class="alert alert-danger" style="position: fixed; bottom: 5px; right: 5px; left: 5px;">
+      <h2 style=" color: red;">엔트리 공식 서비스가 아닙니다. </h2>
+    <h4>서비스 이용과 관련하여 사용자에게 발생한 손해에 대하여 책임을 지지 않습니다.</h4>
+  </div>
 
   </div>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
