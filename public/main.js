@@ -39,7 +39,14 @@ function MainPage() {
             $('#errorTXT').html("사람만 사용가능한 서비스 입니다.");
 
         } else {
-            const projectURL = document.getElementById('inputURL').value.split(/\/(project|study|community|following|follower|bookmark)/)[0];
+            var projectURL;
+            if($('#gridRadios2').is(':checked')){
+                projectURL = document.getElementById('inputURL').value.split(/\/(project|study|community|following|follower|bookmark)/)[0];
+            }else{
+                console.log()
+                projectURL = document.getElementById('inputURL').value;
+            }
+            
             nickname = document.getElementById('inputNickname').value;
             console.log(projectURL);
             var urlType;
