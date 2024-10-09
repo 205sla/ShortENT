@@ -3,6 +3,7 @@ const regex = /^[a-zA-Z0-9]{20,30}$/;
 const regexN = /^[a-zA-Z0-9]{1,30}$/;
 const regexP = /^(https?:\/\/)?playentry\.org\/project\/[a-zA-Z0-9]{20,30}$/;
 
+var nickname ="";
 
 const path = window.location.pathname;
 if (path == "/") {
@@ -37,7 +38,7 @@ function MainPage() {
 
         } else {
             const projectURL = document.getElementById('inputURL').value;
-            const nickname = document.getElementById('inputNickname').value;
+            nickname = document.getElementById('inputNickname').value;
 
 
 
@@ -159,3 +160,13 @@ $('.GoMainPage').on("click", function () {
     window.location.href = window.location.origin;
 
 });
+
+$('.copyURL').on("click", function () {
+    console.log("go main")
+    navigator.clipboard.writeText("엔트리.org/"+nickname).then(res=>{
+        alert("주소가 복사되었습니다!");
+    }).catch((error)=>{
+        alert("주소가 복사실패"+error);
+    })
+});
+
