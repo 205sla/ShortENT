@@ -10,3 +10,5 @@ HTML / CSS / JS
 jQuery / bootstrap
 
 파이어 베이스 (파이어 스토어, 호스팅, 계정 관리)
+
+[개발 일지](https://xn--vj5bn0ab83a.com/Firebase-JavaScript-HTML-URL-11a5b696de7b801d9330e9ce6c62acd7)
