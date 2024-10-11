@@ -83,6 +83,7 @@ function MainPage() {
                         //저장 성공                    
                         $('#loadURL').hide();
                         $('#successURL').fadeIn();
+                        
                         $('.copyURL').html('엔트리.org/' + nickname + ' <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/></svg>');
 
 
@@ -91,7 +92,7 @@ function MainPage() {
                         $('#loadURL').hide();
                         $('#errorShow').show();
                         $('#errorTXT').html("중복된 별명인것 같습니다.<br>" + error.toString());
-                        console.log("중복된 별명인것 같습니다.\n", error);
+                        console.log("아니면 해킹을 시도하고 있거나...");
 
 
                     });
@@ -177,8 +178,8 @@ function Redirect() {
                         //이상한 URL
                         $('#loadURL').hide();
                         $('#strangerURL').fadeIn();
-
-                        $('#stranger').html('<a class="link-danger" href="'+GoUrl+'">"' + GoUrl + '"</a>로 이동하기');
+                        $('.mainC').css('background','#FFFF00');      
+                        $('#stranger').html('<a class="link-danger" href="'+GoUrl+'">"<xmp>' + GoUrl + '</xmp>"</a>로 이동하기');
                     }
 
                 }
