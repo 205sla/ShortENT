@@ -171,7 +171,10 @@ function Redirect() {
 
                         console.log("Document data:", doc.data());
                         console.log("이동",GoUrl)
-                        window.location.href = GoUrl;
+                        setTimeout(() => {
+                            window.location.href = GoUrl;
+                        }, 1000);
+                        
 
 
                     } else {
