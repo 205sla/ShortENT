@@ -11,9 +11,11 @@ service cloud.firestore {
       allow delete: if false;
 
 
-      allow create: if request.resource.data.keys().hasAll(['id']) &&
+      allow create: if request.resource.data.keys().hasAll(['id', 'type', 'time']) &&
                     request.resource.data.id is string &&
-                    request.resource.data.id.matches('^[a-zA-Z0-9]+$');
+                    request.resource.data.id.matches('^[a-zA-Z0-9]+$') &&
+                    request.resource.data.type is string &&
+                    request.resource.data.type in ['project', 'profile', 'world'];
     }
   }
 }
