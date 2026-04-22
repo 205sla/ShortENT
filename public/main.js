@@ -4,6 +4,7 @@ const regexN = /^[a-zA-Z0-9]{1,30}$/;
 const regexP = /^(https?:\/\/)?playentry\.org\/project\/[a-zA-Z0-9]{20,30}$/;
 const regexM = /^(https?:\/\/)?playentry\.org\/profile\/[a-zA-Z0-9]{20,30}$/;
 const regexW = /^(https?:\/\/)?space\.playentry\.org\/world\/[a-zA-Z0-9]{20,30}$/;
+const regexT = /^(https?:\/\/)?playentry\.org\/community\/tips\/[a-zA-Z0-9]{20,30}$/;
 
 // Firebase 초기화 (한 번만 호출)
 firebase.initializeApp(firebaseConfig);
@@ -22,6 +23,17 @@ function MainPage() {
     let nickname = "";
 
     $('.mainPage').show();
+
+    const placeholders = {
+        gridRadios1: "https://playentry.org/project/...",
+        gridRadios2: "https://playentry.org/profile/...",
+        gridRadios3: "https://space.playentry.org/world/...",
+        gridRadios4: "https://playentry.org/community/tips/..."
+    };
+
+    $('input[name="gridRadios"]').on("change", function () {
+        $('#inputURL').attr('placeholder', placeholders[this.id]);
+    });
 
     $('#CreateShortcutURL').on("click", function () {
         const IamRobot = $('#gridCheck1').is(':checked');
@@ -54,6 +66,9 @@ function MainPage() {
         } else if ($('#gridRadios3').is(':checked')) {
             urlType = "world";
             regexURL = regexW;
+        } else if ($('#gridRadios4').is(':checked')) {
+            urlType = "tips";
+            regexURL = regexT;
         }
 
         if (!regexURL.test(projectURL)) {
@@ -123,6 +138,8 @@ function Redirect() {
             GoUrl = 'https://playentry.org/profile/' + projectId;
         } else if (projectType === "world") {
             GoUrl = 'https://space.playentry.org/world/' + projectId;
+        } else if (projectType === "tips") {
+            GoUrl = 'https://playentry.org/community/tips/' + projectId;
         }
 
         if (GoUrl === '') {
