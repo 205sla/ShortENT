@@ -268,6 +268,62 @@ legend.col-form-label {
 }
 
 /* ===========================
+   Legal Pages
+   =========================== */
+.legal-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+    animation: fadeInUp 0.4s ease;
+    line-height: 1.7;
+    color: var(--entry-text);
+}
+
+.legal-page h1.main-heading {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+}
+
+.legal-page h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 32px;
+    margin-bottom: 10px;
+    color: var(--entry-text);
+}
+
+.legal-page p,
+.legal-page li {
+    font-size: 0.92rem;
+}
+
+.legal-page ul,
+.legal-page ol {
+    padding-left: 1.3rem;
+}
+
+.legal-page a {
+    color: var(--entry-primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.legal-page a:hover {
+    text-decoration: underline;
+}
+
+.legal-meta {
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: var(--entry-text-secondary);
+}
+
+.legal-back {
+    margin-top: 24px;
+    font-size: 0.9rem;
+}
+
+/* ===========================
    Animations
    =========================== */
 @keyframes fadeInUp {
