@@ -71,9 +71,26 @@ function MainPage() {
         }
 
         if (!regexURL.test(projectURL)) {
+            const rawURL = $('#inputURL').val();
+            const candidates = [
+                { regex: regexP, label: '엔트리 작품', stripProfileTabs: false },
+                { regex: regexM, label: '마이페이지', stripProfileTabs: true },
+                { regex: regexW, label: '탐험하기', stripProfileTabs: false },
+                { regex: regexT, label: '노하우&팁', stripProfileTabs: false }
+            ];
+            const match = candidates.find(c => {
+                let u = rawURL.split(/[?#]/)[0];
+                if (c.stripProfileTabs) {
+                    u = u.split(/\/(project|study|community|following|follower|bookmark)/)[0];
+                }
+                return c.regex.test(u);
+            });
+
             $('#loadURL').hide();
             $('#errorShow').show();
-            $('#errorTXT').text('올바르지 않은 주소 입니다.');
+            $('#errorTXT').text(match
+                ? `분류를 "${match.label}"(으)로 변경해주세요.`
+                : '올바르지 않은 주소 입니다.');
             return;
         }
 
