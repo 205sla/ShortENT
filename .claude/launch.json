@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["http-server", "public", "-p", "8080", "-c-1"],
       "port": 8080
+    },
+    {
+      "name": "shortent-emulator",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["firebase-tools", "emulators:start", "--only", "hosting"],
+      "port": 5000
     }
   ]
 }
