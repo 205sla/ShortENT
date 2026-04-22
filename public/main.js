@@ -6,8 +6,7 @@ const regexM = /^(https?:\/\/)?playentry\.org\/profile\/[a-zA-Z0-9]{20,30}$/;
 const regexW = /^(https?:\/\/)?space\.playentry\.org\/world\/[a-zA-Z0-9]{20,30}$/;
 const regexT = /^(https?:\/\/)?playentry\.org\/community\/tips\/[a-zA-Z0-9]{20,30}$/;
 
-// Firebase 초기화 (한 번만 호출)
-firebase.initializeApp(firebaseConfig);
+// Firebase는 /__/firebase/init.js 에서 자동 초기화됨 (Firebase Hosting 예약 경로)
 const db = firebase.firestore();
 
 const path = window.location.pathname;
