@@ -1,6 +1,6 @@
 // 정규식: 알파벳과 숫자만 허용
 const regex = /^[a-zA-Z0-9]{20,30}$/;
-const regexN = /^[a-zA-Z0-9]{1,30}$/;
+const regexN = /^[\uAC00-\uD7A3a-zA-Z0-9]{1,30}$/;
 const regexP = /^(https?:\/\/)?playentry\.org\/project\/[a-zA-Z0-9]{20,30}$/;
 const regexM = /^(https?:\/\/)?playentry\.org\/profile\/[a-zA-Z0-9]{20,30}$/;
 const regexW = /^(https?:\/\/)?space\.playentry\.org\/world\/[a-zA-Z0-9]{20,30}$/;
@@ -88,8 +88,9 @@ function MainPage() {
         const nowTime = new Date().toISOString();
         const parts = projectURL.split('/');
         const projectId = parts[parts.length - 1];
+        const docId = punycode.toASCII(nickname);
 
-        db.collection('EntWork').doc(nickname).set({
+        db.collection('EntWork').doc(docId).set({
             id: projectId,
             time: nowTime,
             type: urlType
@@ -118,8 +119,9 @@ function MainPage() {
 function Redirect() {
     $('.loading-container').show();
 
-    const result = path.split('/').filter(Boolean).pop();
-    const docRef = db.collection("EntWork").doc(result);
+    const result = decodeURIComponent(path.split('/').filter(Boolean).pop());
+    const lookupKey = punycode.toASCII(result);
+    const docRef = db.collection("EntWork").doc(lookupKey);
 
     docRef.get().then((doc) => {
         if (!doc.exists) {
